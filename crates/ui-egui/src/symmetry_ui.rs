@@ -66,6 +66,7 @@ pub fn can_transform(app: &PhotocraftApp) -> bool {
         && app.distort.liquify.is_none()
         && app.distort.puppet.is_none()
         && app.distort.perspective.is_none()
+        && app.distort.global_perspective.is_none()
         && crate::jobs_ui::job_in_view(app).is_none()
 }
 pub fn begin(app: &mut PhotocraftApp) -> Result<(), String> {

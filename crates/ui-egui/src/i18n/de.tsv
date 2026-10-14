@@ -3177,3 +3177,23 @@ curves	Smooth	Glätten
 # View › Guides › right-click a guide
 	Edit Selected Guides	Ausgewählte Hilfslinien bearbeiten
 	Clear Selected Guides	Ausgewählte Hilfslinien löschen
+
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Kanten verbinden
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Übereinstimmende benachbarte Kanten innerhalb von 8 Dokumentpixeln verbinden; andere Ebenen bleiben unverändert
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Globale Perspektivkorrektur
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: Unabhängige Hilfsrahmen auf Türen und Fenster zeichnen, dann das ganze Foto entzerren
+	One global transform; guides are not image regions	Eine globale Transformation; Hilfsrahmen sind keine Bildbereiche
+	Edit guides	Hilfsrahmen bearbeiten
+	Rectify globally	Global entzerren
+	Delete guide	Hilfsrahmen löschen
+	Fit whole photo	Ganzes Foto einpassen
+	Global aspect	Globale Proportionen
+	Guide weight	Gewichtung des Hilfsrahmens
+	True proportions require a known measurement	Echte Proportionen erfordern ein bekanntes Maß
+	Inconsistent guides	Unvereinbare Hilfsrahmen
+	Compatible guides	Vereinbare Hilfsrahmen
+	Commit global rectification	Globale Entzerrung anwenden

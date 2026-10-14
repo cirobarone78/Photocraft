@@ -3874,3 +3874,22 @@ curves	Smooth	Згладити
 # View › Guides › right-click a guide
 	Edit Selected Guides	Редагувати вибрані напрямні
 	Clear Selected Guides	Очистити вибрані напрямні
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	З’єднати краї
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	З’єднує суміжні краї, що збігаються, у межах 8 пікселів документа; інші площини залишаються без змін
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Глобальна корекція перспективи
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: намалюйте незалежні напрямні на дверях і вікнах та випряміть усе фото
+	One global transform; guides are not image regions	Одне глобальне перетворення; напрямні не є ділянками зображення
+	Edit guides	Редагувати напрямні
+	Rectify globally	Випрямити глобально
+	Delete guide	Видалити напрямну
+	Fit whole photo	Вмістити все фото
+	Global aspect	Загальні пропорції
+	Guide weight	Вага напрямної
+	True proportions require a known measurement	Для справжніх пропорцій потрібен відомий розмір
+	Inconsistent guides	Несумісні напрямні
+	Compatible guides	Сумісні напрямні
+	Commit global rectification	Застосувати глобальну корекцію

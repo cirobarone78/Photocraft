@@ -3783,3 +3783,22 @@ navigator	Zoom	Zvětšení
 # View › Guides › right-click a guide
 	Edit Selected Guides	Upravit vybraná vodítka
 	Clear Selected Guides	Vymazat vybraná vodítka
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Propojit hrany
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Propojí odpovídající sousední hrany do vzdálenosti 8 pixelů dokumentu; ostatní roviny zůstanou beze změny
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Globální korekce perspektivy
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: nakreslete nezávislé vodicí rámečky na dveře a okna a narovnejte celou fotografii
+	One global transform; guides are not image regions	Jedna globální transformace; rámečky nejsou oblasti obrázku
+	Edit guides	Upravit rámečky
+	Rectify globally	Narovnat globálně
+	Delete guide	Smazat rámeček
+	Fit whole photo	Přizpůsobit celou fotografii
+	Global aspect	Globální proporce
+	Guide weight	Váha rámečku
+	True proportions require a known measurement	Skutečné proporce vyžadují známý rozměr
+	Inconsistent guides	Neslučitelné rámečky
+	Compatible guides	Slučitelné rámečky
+	Commit global rectification	Použít globální korekci

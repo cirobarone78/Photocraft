@@ -24,6 +24,7 @@ pub struct Distort {
     pub liquify: Option<crate::liquify_ui::LiquifyDialog>,
     pub puppet: Option<crate::puppet_ui::PuppetSession>,
     pub perspective: Option<crate::perspective_ui::PerspSession>,
+    pub global_perspective: Option<crate::global_perspective_ui::GlobalSession>,
     pub vanishing: Option<crate::vp_ui::VpSession>,
     /// Filter Gallery dialog (gallery_ui).
     pub gallery: Option<crate::gallery_ui::GalleryDialog>,
@@ -33,7 +34,7 @@ pub struct Distort {
 
 impl Distort {
     pub fn active(&self) -> bool {
-        self.liquify.is_some() || self.puppet.is_some() || self.perspective.is_some() || self.vanishing.is_some()
+        self.liquify.is_some() || self.puppet.is_some() || self.perspective.is_some() || self.global_perspective.is_some() || self.vanishing.is_some()
     }
 
     /// Short description for `ui.inspect`.
@@ -42,6 +43,7 @@ impl Distort {
             "liquify": self.liquify.as_ref().map(|d| d.describe()),
             "puppet": self.puppet.as_ref().map(|p| p.describe()),
             "perspective": self.perspective.as_ref().map(|p| p.describe()),
+            "globalPerspective": self.global_perspective.as_ref().map(|p| p.describe()),
             "vanishingPoint": self.vanishing.as_ref().map(|v| v.describe()),
             "gallery": self.gallery.as_ref().map(|g| g.describe()),
         })
@@ -96,7 +98,16 @@ pub fn display_doc(app: &PhotocraftApp, idx: usize) -> Option<(Arc<Document>, u6
     if let Some(p) = &app.distort.puppet {
         return Some((p.preview_doc.clone(), (1 << 42) + p.key));
     }
+    if let Some(p) = &app.distort.global_perspective {
+        if !crate::global_perspective_ui::bound_to_active_document(app, p) {
+            return None;
+        }
+        return Some((p.preview_doc.clone(), (1 << 42) + p.key));
+    }
     if let Some(p) = &app.distort.perspective {
+        if !crate::perspective_ui::bound_to_active_document(app, p) {
+            return None;
+        }
         return Some((p.preview_doc.clone(), (1 << 42) + p.key));
     }
     None
@@ -107,6 +118,16 @@ pub fn menu(app: &mut PhotocraftApp, ctx: &egui::Context, id: &str, params: &Val
     let empty = params.as_object().is_none_or(|o| o.is_empty());
     let ui = params.get("ui");
     match id {
+        "edit.perspectiveWarpGlobal" => Some((|| {
+            let object = params.as_object().ok_or("global perspective parameters must be an object")?;
+            if object.is_empty() {
+                return crate::global_perspective_ui::begin(app, ctx).map(|_| json!({"globalPerspective": app.distort.describe()["globalPerspective"]}));
+            }
+            if object.len() != 1 || !object.contains_key("ui") {
+                return Err("interactive global perspective expects only the ui field; use engine.execute for direct execution".into());
+            }
+            crate::global_perspective_ui::control(app, &params["ui"])
+        })()),
         "filter.filterGallery" if empty => Some(crate::gallery_ui::open(app).map(|_| json!({"gallery": app.distort.describe()["gallery"]}))),
         "filter.filterGallery" if ui.is_some() && app.distort.gallery.is_some() => Some(crate::gallery_ui::control(app, ui.unwrap_or(&Value::Null))),
         "filter.liquify" if empty => Some(crate::liquify_ui::open(app, ctx).map(|_| json!({"liquify": app.distort.describe()["liquify"]}))),
@@ -131,6 +152,10 @@ pub fn menu(app: &mut PhotocraftApp, ctx: &egui::Context, id: &str, params: &Val
 
 /// Pointer events (document coordinates) while a mode is active. True when consumed.
 pub fn pointer(app: &mut PhotocraftApp, ev: ToolEvent, mods: egui::Modifiers) -> bool {
+    if app.distort.global_perspective.is_some() {
+        crate::global_perspective_ui::pointer(app, ev, mods);
+        return true;
+    }
     if app.distort.liquify.is_some() {
         crate::liquify_ui::pointer(app, ev, mods);
         return true;
@@ -139,8 +164,10 @@ pub fn pointer(app: &mut PhotocraftApp, ev: ToolEvent, mods: egui::Modifiers) ->
         crate::puppet_ui::pointer(app, ev, mods);
         return true;
     }
-    if app.distort.perspective.is_some() {
-        crate::perspective_ui::pointer(app, ev, mods);
+    if let Some(p) = &app.distort.perspective {
+        if crate::perspective_ui::bound_to_active_document(app, p) {
+            crate::perspective_ui::pointer(app, ev, mods);
+        }
         return true;
     }
     if app.distort.vanishing.is_some() {
@@ -156,6 +183,16 @@ pub fn keys(app: &mut PhotocraftApp, ctx: &egui::Context) -> bool {
     use egui::{Key, Modifiers};
     let enter = |ctx: &egui::Context| ctx.input_mut(|i| i.consume_key(Modifiers::NONE, Key::Enter));
     let esc = |ctx: &egui::Context| ctx.input_mut(|i| i.consume_key(Modifiers::NONE, Key::Escape));
+    if app.distort.global_perspective.is_some() {
+        if enter(ctx) {
+            if let Err(error) = crate::global_perspective_ui::commit(app) {
+                app.ui.status = error;
+            }
+        } else if esc(ctx) {
+            app.distort.global_perspective = None;
+        }
+        return true;
+    }
     if app.distort.gallery.is_some() {
         if enter(ctx) {
             let _ = crate::gallery_ui::commit(app);
@@ -189,7 +226,7 @@ pub fn keys(app: &mut PhotocraftApp, ctx: &egui::Context) -> bool {
     }
     if app.distort.perspective.is_some() {
         if enter(ctx) {
-            crate::perspective_ui::commit(app);
+            let _ = crate::perspective_ui::commit(app);
         } else if esc(ctx) {
             app.distort.perspective = None;
         }
@@ -210,10 +247,17 @@ pub fn keys(app: &mut PhotocraftApp, ctx: &egui::Context) -> bool {
 
 /// Canvas overlay for the on-canvas modes.
 pub fn draw_overlay(app: &PhotocraftApp, painter: &egui::Painter, xf: &ViewXform) {
+    if let Some(p) = &app.distort.global_perspective
+        && crate::global_perspective_ui::bound_to_active_document(app, p)
+    {
+        crate::global_perspective_ui::draw(p, painter, xf);
+    }
     if let Some(p) = &app.distort.puppet {
         crate::puppet_ui::draw(p, painter, xf);
     }
-    if let Some(p) = &app.distort.perspective {
+    if let Some(p) = &app.distort.perspective
+        && crate::perspective_ui::bound_to_active_document(app, p)
+    {
         crate::perspective_ui::draw(p, painter, xf);
     }
     if let Some(v) = &app.distort.vanishing {
@@ -223,11 +267,19 @@ pub fn draw_overlay(app: &PhotocraftApp, painter: &egui::Painter, xf: &ViewXform
 
 /// Options bar for the on-canvas modes. True when drawn.
 pub fn options_bar(app: &mut PhotocraftApp, ui: &mut egui::Ui) -> bool {
+    if let Some(p) = &app.distort.global_perspective
+        && crate::global_perspective_ui::bound_to_active_document(app, p)
+    {
+        crate::global_perspective_ui::options_bar(app, ui);
+        return true;
+    }
     if app.distort.puppet.is_some() {
         crate::puppet_ui::options_bar(app, ui);
         return true;
     }
-    if app.distort.perspective.is_some() {
+    if let Some(p) = &app.distort.perspective
+        && crate::perspective_ui::bound_to_active_document(app, p)
+    {
         crate::perspective_ui::options_bar(app, ui);
         return true;
     }

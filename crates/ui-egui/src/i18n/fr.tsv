@@ -3179,3 +3179,22 @@ curves	Smooth	Lisser
 # View › Guides › right-click a guide
 	Edit Selected Guides	Modifier les repères sélectionnés
 	Clear Selected Guides	Effacer les repères sélectionnés
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Lier les arêtes
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Relie les arêtes voisines correspondantes à moins de 8 pixels du document ; préserve les autres plans
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Déformation de perspective globale
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3 : placez des repères indépendants sur les portes et fenêtres, puis redressez toute la photo
+	One global transform; guides are not image regions	Une seule transformation globale ; les repères ne sont pas des zones d’image
+	Edit guides	Modifier les repères
+	Rectify globally	Redresser globalement
+	Delete guide	Supprimer le repère
+	Fit whole photo	Conserver toute la photo
+	Global aspect	Proportions globales
+	Guide weight	Poids du repère
+	True proportions require a known measurement	Les proportions réelles nécessitent une mesure connue
+	Inconsistent guides	Repères incompatibles
+	Compatible guides	Repères compatibles
+	Commit global rectification	Appliquer le redressement global

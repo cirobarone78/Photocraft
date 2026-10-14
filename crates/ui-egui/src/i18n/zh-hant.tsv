@@ -2775,3 +2775,23 @@ curves	Smooth	平滑
 # View › Guides › right-click a guide
 	Edit Selected Guides	編輯所選參考線
 	Clear Selected Guides	清除所選參考線
+
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	連結邊緣
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	連結文件中相距不超過 8 像素的相符相鄰邊緣；其他平面保持不變
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	全域透視校正
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3：在門窗上繪製獨立參考框，然後校正整張照片
+	One global transform; guides are not image regions	只使用一個全域變換；參考框不是影像分區
+	Edit guides	編輯參考框
+	Rectify globally	全域校正
+	Delete guide	刪除參考框
+	Fit whole photo	容納整張照片
+	Global aspect	全域比例
+	Guide weight	參考框權重
+	True proportions require a known measurement	真實比例需要已知尺寸
+	Inconsistent guides	不相容的參考框
+	Compatible guides	相容的參考框
+	Commit global rectification	套用全域校正

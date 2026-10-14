@@ -3875,3 +3875,23 @@ curves	Smooth	Εξομάλυνση
 # View › Guides › right-click a guide
 	Edit Selected Guides	Επεξεργασία επιλεγμένων οδηγών
 	Clear Selected Guides	Απαλοιφή επιλεγμένων οδηγών
+
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Σύνδεση ακμών
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Συνδέει γειτονικές ακμές που ταιριάζουν σε απόσταση έως 8 εικονοστοιχεία εγγράφου· τα άλλα επίπεδα διατηρούνται
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Καθολική διόρθωση προοπτικής
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: σχεδιάστε ανεξάρτητους οδηγούς σε πόρτες και παράθυρα και διορθώστε όλη τη φωτογραφία
+	One global transform; guides are not image regions	Ένας καθολικός μετασχηματισμός· οι οδηγοί δεν είναι περιοχές εικόνας
+	Edit guides	Επεξεργασία οδηγών
+	Rectify globally	Καθολική διόρθωση
+	Delete guide	Διαγραφή οδηγού
+	Fit whole photo	Προσαρμογή όλης της φωτογραφίας
+	Global aspect	Καθολικές αναλογίες
+	Guide weight	Βάρος οδηγού
+	True proportions require a known measurement	Οι πραγματικές αναλογίες απαιτούν γνωστή μέτρηση
+	Inconsistent guides	Ασύμβατοι οδηγοί
+	Compatible guides	Συμβατοί οδηγοί
+	Commit global rectification	Εφαρμογή καθολικής διόρθωσης

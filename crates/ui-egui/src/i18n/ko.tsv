@@ -3353,3 +3353,23 @@ curves	Smooth	매끄럽게
 # View › Guides › right-click a guide
 	Edit Selected Guides	선택한 안내선 편집
 	Clear Selected Guides	선택한 안내선 지우기
+
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	모서리 연결
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	문서에서 8픽셀 이내의 일치하는 인접 모서리를 연결합니다. 다른 평면은 변경하지 않습니다
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	전역 원근 보정
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: 문과 창문에 독립적인 가이드를 그린 후 사진 전체를 보정하세요
+	One global transform; guides are not image regions	하나의 전역 변환이며 가이드는 이미지 영역이 아닙니다
+	Edit guides	가이드 편집
+	Rectify globally	전체 보정
+	Delete guide	가이드 삭제
+	Fit whole photo	사진 전체 맞춤
+	Global aspect	전체 비율
+	Guide weight	가이드 가중치
+	True proportions require a known measurement	실제 비율에는 알려진 치수가 필요합니다
+	Inconsistent guides	호환되지 않는 가이드
+	Compatible guides	호환되는 가이드
+	Commit global rectification	전역 보정 적용

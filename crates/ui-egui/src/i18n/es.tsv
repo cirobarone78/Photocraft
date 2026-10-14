@@ -4137,3 +4137,23 @@ navigator	Zoom	Zoom
 # View › Guides › right-click a guide
 	Edit Selected Guides	Editar guías seleccionadas
 	Clear Selected Guides	Borrar guías seleccionadas
+
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Unir bordes
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Une bordes vecinos coincidentes a menos de 8 píxeles del documento; conserva los demás planos
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Corrección global de perspectiva
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: dibuje guías independientes en puertas y ventanas y rectifique toda la foto
+	One global transform; guides are not image regions	Una transformación global; las guías no son regiones de la imagen
+	Edit guides	Editar guías
+	Rectify globally	Rectificar globalmente
+	Delete guide	Eliminar guía
+	Fit whole photo	Ajustar toda la foto
+	Global aspect	Proporciones globales
+	Guide weight	Peso de la guía
+	True proportions require a known measurement	Las proporciones reales requieren una medida conocida
+	Inconsistent guides	Guías incompatibles
+	Compatible guides	Guías compatibles
+	Commit global rectification	Aplicar rectificación global

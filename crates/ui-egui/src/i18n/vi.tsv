@@ -3661,3 +3661,22 @@ curves	Smooth	Làm mượt
 # View › Guides › right-click a guide
 	Edit Selected Guides	Sửa đường căn đã chọn
 	Clear Selected Guides	Xóa đường căn đã chọn
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Liên kết cạnh
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Liên kết các cạnh kề nhau khớp nhau trong phạm vi 8 pixel của tài liệu; giữ nguyên các mặt phẳng khác
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Hiệu chỉnh phối cảnh toàn cục
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: vẽ các khung tham chiếu độc lập trên cửa ra vào và cửa sổ, rồi chỉnh toàn bộ ảnh
+	One global transform; guides are not image regions	Một phép biến đổi toàn cục; khung tham chiếu không phải vùng ảnh
+	Edit guides	Sửa khung tham chiếu
+	Rectify globally	Hiệu chỉnh toàn cục
+	Delete guide	Xóa khung tham chiếu
+	Fit whole photo	Vừa toàn bộ ảnh
+	Global aspect	Tỷ lệ toàn cục
+	Guide weight	Trọng số khung
+	True proportions require a known measurement	Tỷ lệ thực cần một kích thước đã biết
+	Inconsistent guides	Khung không tương thích
+	Compatible guides	Khung tương thích
+	Commit global rectification	Áp dụng hiệu chỉnh toàn cục

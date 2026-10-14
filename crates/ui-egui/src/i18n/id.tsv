@@ -3166,3 +3166,22 @@ curves	Smooth	Haluskan
 # View › Guides › right-click a guide
 	Edit Selected Guides	Edit Panduan Terpilih
 	Clear Selected Guides	Hapus Panduan Terpilih
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Tautkan Tepi
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Tautkan tepi bersebelahan yang cocok dalam jarak 8 piksel dokumen; bidang lain tetap terjaga
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Koreksi perspektif global
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: gambar panduan terpisah pada pintu dan jendela, lalu luruskan seluruh foto
+	One global transform; guides are not image regions	Satu transformasi global; panduan bukan wilayah gambar
+	Edit guides	Edit panduan
+	Rectify globally	Luruskan secara global
+	Delete guide	Hapus panduan
+	Fit whole photo	Muat seluruh foto
+	Global aspect	Proporsi global
+	Guide weight	Bobot panduan
+	True proportions require a known measurement	Proporsi sebenarnya memerlukan ukuran yang diketahui
+	Inconsistent guides	Panduan tidak kompatibel
+	Compatible guides	Panduan kompatibel
+	Commit global rectification	Terapkan koreksi global

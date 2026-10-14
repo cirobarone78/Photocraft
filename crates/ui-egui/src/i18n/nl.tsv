@@ -3935,3 +3935,22 @@ curves	Smooth	Vloeiend maken
 # View › Guides › right-click a guide
 	Edit Selected Guides	Geselecteerde hulplijnen bewerken
 	Clear Selected Guides	Geselecteerde hulplijnen wissen
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Randen koppelen
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Verbindt overeenkomende aangrenzende randen binnen 8 documentpixels; behoudt overige vlakken
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Globale perspectiefcorrectie
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: teken afzonderlijke hulpkaders op deuren en ramen en corrigeer de hele foto
+	One global transform; guides are not image regions	Eén globale transformatie; hulpkaders zijn geen afbeeldingsgebieden
+	Edit guides	Hulpkaders bewerken
+	Rectify globally	Globaal rechtzetten
+	Delete guide	Hulpkader verwijderen
+	Fit whole photo	Hele foto inpassen
+	Global aspect	Globale verhoudingen
+	Guide weight	Gewicht van hulpkader
+	True proportions require a known measurement	Werkelijke verhoudingen vereisen een bekende maat
+	Inconsistent guides	Onverenigbare hulpkaders
+	Compatible guides	Verenigbare hulpkaders
+	Commit global rectification	Globale correctie toepassen

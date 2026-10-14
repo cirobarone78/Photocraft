@@ -3773,3 +3773,22 @@ curves	Smooth	Wygładź
 # View › Guides › right-click a guide
 	Edit Selected Guides	Edytuj zaznaczone prowadnice
 	Clear Selected Guides	Usuń zaznaczone prowadnice
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Połącz krawędzie
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Łączy pasujące sąsiednie krawędzie w odległości do 8 pikseli dokumentu; pozostałe płaszczyzny pozostają bez zmian
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Globalna korekcja perspektywy
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: narysuj niezależne ramki na drzwiach i oknach, a następnie wyprostuj całe zdjęcie
+	One global transform; guides are not image regions	Jedna globalna transformacja; ramki nie są obszarami obrazu
+	Edit guides	Edytuj ramki
+	Rectify globally	Wyprostuj globalnie
+	Delete guide	Usuń ramkę
+	Fit whole photo	Dopasuj całe zdjęcie
+	Global aspect	Globalne proporcje
+	Guide weight	Waga ramki
+	True proportions require a known measurement	Rzeczywiste proporcje wymagają znanego wymiaru
+	Inconsistent guides	Niezgodne ramki
+	Compatible guides	Zgodne ramki
+	Commit global rectification	Zastosuj globalną korekcję

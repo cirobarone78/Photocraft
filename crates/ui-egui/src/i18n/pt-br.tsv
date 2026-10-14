@@ -3965,3 +3965,22 @@ layerLabel	No Color	Sem cor
 # View › Guides › right-click a guide
 	Edit Selected Guides	Editar guias selecionadas
 	Clear Selected Guides	Limpar guias selecionadas
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Vincular arestas
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Vincula arestas adjacentes correspondentes em até 8 pixels do documento; preserva os demais planos
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Correção global de perspectiva
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: desenhe guias independentes em portas e janelas e retifique a foto inteira
+	One global transform; guides are not image regions	Uma transformação global; as guias não são regiões da imagem
+	Edit guides	Editar guias
+	Rectify globally	Retificar globalmente
+	Delete guide	Excluir guia
+	Fit whole photo	Ajustar a foto inteira
+	Global aspect	Proporções globais
+	Guide weight	Peso da guia
+	True proportions require a known measurement	As proporções reais exigem uma medida conhecida
+	Inconsistent guides	Guias incompatíveis
+	Compatible guides	Guias compatíveis
+	Commit global rectification	Aplicar retificação global

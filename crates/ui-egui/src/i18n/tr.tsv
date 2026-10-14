@@ -3905,3 +3905,23 @@ cameraData	Lens	Lens
 # View › Guides › right-click a guide
 	Edit Selected Guides	Seçili Kılavuzları Düzenle
 	Clear Selected Guides	Seçili Kılavuzları Temizle
+
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Kenarları Bağla
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Birbirine uyan komşu kenarları 8 belge pikseli içinde bağlar; diğer düzlemler korunur
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Genel perspektif düzeltme
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: kapı ve pencerelere bağımsız kılavuzlar çizin, ardından fotoğrafın tamamını düzeltin
+	One global transform; guides are not image regions	Tek bir genel dönüşüm; kılavuzlar görüntü bölgeleri değildir
+	Edit guides	Kılavuzları düzenle
+	Rectify globally	Genel olarak düzelt
+	Delete guide	Kılavuzu sil
+	Fit whole photo	Tüm fotoğrafı sığdır
+	Global aspect	Genel oranlar
+	Guide weight	Kılavuz ağırlığı
+	True proportions require a known measurement	Gerçek oranlar bilinen bir ölçü gerektirir
+	Inconsistent guides	Uyumsuz kılavuzlar
+	Compatible guides	Uyumlu kılavuzlar
+	Commit global rectification	Genel düzeltmeyi uygula

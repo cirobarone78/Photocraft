@@ -4296,3 +4296,23 @@ shape	Appearance	Aspetto
 # View › Guides › right-click a guide
 	Edit Selected Guides	Modifica guide selezionate
 	Clear Selected Guides	Cancella guide selezionate
+
+
+# BCS V2 - Perspective Warp linked-plane labels
+	Link Edges	Collega bordi
+	Join matching neighbouring edges within 8 document pixels; preserves other planes	Collega i bordi adiacenti corrispondenti entro 8 pixel del documento; mantiene invariati gli altri piani
+
+# BCS Global Perspective Warp V3: original translations
+	Global Perspective Warp	Correzione prospettica globale
+	Global V3: draw independent guides on doors and windows, then rectify the whole photo	Global V3: disegna guide indipendenti su porte e finestre, poi raddrizza l’intera foto
+	One global transform; guides are not image regions	Una trasformazione globale; le guide non sono regioni dell’immagine
+	Edit guides	Modifica guide
+	Rectify globally	Raddrizza globalmente
+	Delete guide	Elimina guida
+	Fit whole photo	Adatta l’intera foto
+	Global aspect	Proporzioni globali
+	Guide weight	Peso della guida
+	True proportions require a known measurement	Le proporzioni reali richiedono una misura nota
+	Inconsistent guides	Guide incompatibili
+	Compatible guides	Guide compatibili
+	Commit global rectification	Applica correzione globale
