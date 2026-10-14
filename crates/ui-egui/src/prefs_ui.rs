@@ -809,13 +809,7 @@ pub fn shortcut_items(app: &PhotocraftApp) -> Vec<(String, String, Vec<String>, 
 /// quit): Edit › Keyboard Shortcuts won't assign them, as Photoshop won't. `sc` is in our
 /// notation, where `Cmd` is Ctrl off the Mac.
 pub fn reserved_shortcut(sc: &str) -> bool {
-    let Some(n) = prefs::normalize_shortcut(sc) else { return false };
-    let reserved: &[&str] = if cfg!(target_os = "macos") {
-        &["Cmd+Tab", "Cmd+Shift+Tab", "Cmd+Alt+Escape", "Cmd+`"]
-    } else {
-        &["Alt+Tab", "Alt+Shift+Tab", "Alt+F4", "Cmd+Alt+Delete", "Cmd+Escape", "Cmd+Shift+Escape"]
-    };
-    reserved.iter().filter_map(|r| prefs::normalize_shortcut(r)).any(|r| r == n)
+    prefs::reserved_shortcut(sc)
 }
 
 pub fn shortcut_text(key: egui::Key, m: egui::Modifiers) -> Option<String> {
