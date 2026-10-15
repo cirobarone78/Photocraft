@@ -1618,12 +1618,10 @@ pub fn status_bar(app: &mut PhotocraftApp, ui: &mut egui::Ui) {
                 if let (Some(st), Some(i)) = (app.session.active(), app.session.active_index()) {
                     let (w, h, mode, bits, layers) =
                         (st.doc.size.width, st.doc.size.height, crate::canvas::mode_label(&st.doc), st.doc.depth.bits(), st.doc.layer_count());
-                    let mut pct = app.ui.views[i].zoom * 100.0;
-                    if widgets::compact_wrapping_value_field(ui, &mut pct, crate::zoom_levels::percent_range(&app.ui.views[i]), "%", vec2(78.0, control_h))
-                        .changed()
-                    {
-                        app.ui.views[i].zoom = crate::zoom_levels::clamp(pct / 100.0, app.ui.views[i].doc_size);
-                        app.ui.views[i].fit_pending = false;
+                    let mut pct = crate::zoom_levels::field_percent(ui.ctx(), i, app.ui.views[i].zoom);
+                    let field = widgets::compact_wrapping_value_field(ui, &mut pct, crate::zoom_levels::percent_range(&app.ui.views[i]), "%", vec2(78.0, control_h));
+                    if field.changed() {
+                        crate::zoom_levels::set_from_field(ui.ctx(), i, &mut app.ui.views[i], field.dragged() || field.drag_started(), pct);
                     }
                     widgets::vline(ui, 16.0);
                     label(ui, &crate::i18n::fmt(tl!("{mode} Color · {bits} bit"), &[("mode", mode), ("bits", &bits.to_string())]));
@@ -1974,10 +1972,10 @@ fn navigator(app: &mut PhotocraftApp, ui: &mut egui::Ui) {
                 app.ui.views[idx].zoom = crate::zoom_levels::clamp(zoom, v.doc_size);
                 app.ui.views[idx].fit_pending = false;
             };
-            let mut pct = v.zoom * 100.0;
+            let mut pct = crate::zoom_levels::field_percent(ui.ctx(), idx, v.zoom);
             let field = widgets::compact_wrapping_value_field(ui, &mut pct, crate::zoom_levels::percent_range(&app.ui.views[idx]), "%", vec2(64.0, NAV_ROW_H));
             if field.changed() {
-                set(app, pct / 100.0);
+                crate::zoom_levels::set_from_field(ui.ctx(), idx, &mut app.ui.views[idx], field.dragged() || field.drag_started(), pct);
             }
             let out = crate::brush_picker::named(icons::button(ui, "minus", NAV_ROW_H, false, tl!("Zoom Out")), "Zoom Out");
             if out.clicked() {
