@@ -302,9 +302,10 @@ pub fn compact_value_field(ui: &mut Ui, value: &mut f32, range: std::ops::RangeI
     value_field_box(ui, value, range, suffix, vec2(width, height), 0.0, FieldOpts::default()).0
 }
 
-/// A compact field whose mouse scrub wraps at the native fullscreen viewport's horizontal edges.
+/// A compact field whose mouse scrub wraps at the native fullscreen viewport's horizontal edges,
+/// and whose typed number applies on Enter, Tab or click-away (Esc drops it): the zoom fields.
 pub(crate) fn compact_wrapping_value_field(ui: &mut Ui, value: &mut f32, range: std::ops::RangeInclusive<f32>, suffix: &str, size: Vec2) -> Response {
-    value_field_box(ui, value, range, suffix, size, 0.0, FieldOpts { wrap_drag: true, ..Default::default() }).0
+    value_field_box(ui, value, range, suffix, size, 0.0, FieldOpts { wrap_drag: true, hold_typed: true, ..Default::default() }).0
 }
 
 /// A size dialog's unit key (`px`, `in`, `cm`, `mm`, `pt`, `pica`, `percent`) as a unit.
@@ -500,6 +501,9 @@ struct FieldOpts {
     /// The unit typed units convert into (default: the suffix's, at [`set_field_resolution`]).
     units: Option<FieldUnits>,
     wrap_drag: bool,
+    /// A typed number waits for Enter, Tab or click-away, as arithmetic does, instead of applying
+    /// per keystroke (the zoom fields: typing `150` over `50` must not zoom to 1 % on the way).
+    hold_typed: bool,
 }
 
 /// A [`value_field`] that leaves `trailing` points free inside its box, right of the suffix, and
@@ -526,7 +530,7 @@ fn value_field_box(
     trailing: f32,
     opts: FieldOpts,
 ) -> (Response, Rect) {
-    let FieldOpts { decimals, units, wrap_drag } = opts;
+    let FieldOpts { units, .. } = opts;
     let t = Tokens::get(ui.ctx());
     let (rect, slot) = ui.allocate_exact_size(size, Sense::hover());
     let scrub = take_label_scrub(ui, rect).map(|s| {
@@ -585,7 +589,7 @@ fn value_field_box(
             ui.spacing_mut().button_padding = Vec2::ZERO;
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 let layout = egui::Layout::centered_and_justified(ui.layout().main_dir());
-                ui.allocate_ui_with_layout(field.size(), layout, |ui| number_edit(ui, value, range, fine, decimals, units, wrap_drag)).inner
+                ui.allocate_ui_with_layout(field.size(), layout, |ui| number_edit(ui, value, range, fine, units, opts)).inner
             })
             .inner
         }
@@ -793,18 +797,19 @@ pub fn focus_first_field(ctx: &egui::Context, on: bool) {
     });
 }
 
-/// The number in a [`value_field`]. A typed number applies as it's typed; arithmetic waits for
-/// Enter, Tab or click-away, because per keystroke `5/2` would land first and a caller that
-/// rounds it would cut `5/2*2` short. `changed()` means a new value, not just a keystroke.
+/// The number in a [`value_field`]. A typed number applies as it's typed, unless `opts.hold_typed`;
+/// arithmetic always waits for Enter, Tab or click-away, because per keystroke `5/2` would land
+/// first and a caller that rounds it would cut `5/2*2` short. `changed()` means a new value, not
+/// just a keystroke.
 fn number_edit(
     ui: &mut Ui,
     value: &mut f32,
     range: std::ops::RangeInclusive<f32>,
     fine: bool,
-    decimals: Option<u32>,
     units: crate::numeric_expression::Units,
-    wrap_drag: bool,
+    opts: FieldOpts,
 ) -> Response {
+    let FieldOpts { decimals, wrap_drag, hold_typed, .. } = opts;
     let (id, ctx) = (ui.next_auto_id(), ui.ctx().clone());
     // Focused before the DragValue is drawn, so it gains focus this frame and selects its text.
     if ui.data_mut(|d| d.remove_temp::<bool>(first_field_id())).unwrap_or(false) {
@@ -834,7 +839,7 @@ fn number_edit(
                 None if fine => fmt_num2(v),
                 None => fmt_num(v),
             })
-            .update_while_editing(!math)
+            .update_while_editing(!math && !hold_typed)
             // Focus is read when parsing, not above: Tab hands it on inside `ui.add`.
             .custom_parser(move |s| {
                 let v = parse_num_in(s, units);
@@ -2286,6 +2291,29 @@ mod tests {
         h.key_press(egui::Key::Enter);
         h.run();
         assert_eq!(*h.state(), (25.0, 3));
+    }
+	
+    #[test]
+    fn compact_wrapping_value_field_waits_for_enter() {
+        use egui_kittest::{Harness, kittest::Queryable};
+        let mut h = Harness::builder().with_size(egui::vec2(300.0, 100.0)).build_ui_state(
+            |ui, (v, changes): &mut (f32, u32)| {
+                if super::compact_wrapping_value_field(ui, v, 0.0..=12800.0, "%", egui::vec2(90.0, 20.0)).changed() {
+                    *changes += 1;
+                }
+            },
+            (50.0, 0),
+        );
+        h.get_by_role(egui::accesskit::Role::SpinButton).click();
+        h.run();
+        for c in ['1', '5', '0'] {
+            h.event(egui::Event::Text(c.to_string()));
+            h.run();
+            assert_eq!(*h.state(), (50.0, 0), "after {c}");
+        }
+        h.key_press(egui::Key::Enter);
+        h.run();
+        assert_eq!(*h.state(), (150.0, 1));
     }
 
     /// #5717: a value past the range shows as it is without reporting a change; an edit is clamped.
