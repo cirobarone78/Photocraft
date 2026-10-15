@@ -94,5 +94,18 @@ fn sets_read_and_write_files_and_export_everything() {
     ] {
         assert!(s.execute("edit.keyboardShortcuts", p.clone()).is_err(), "{p}");
     }
+    // A change paired with an export that fails (a folder that doesn't exist, a bad summarize
+    // value) changes nothing.
+    let before = ks(&mut s, json!({}))["overrides"].clone();
+    for p in [
+        json!({"set": {"edit.copy": "F10"}, "exportKys": {"path": dir.join("no").join("such").join("x.kys").to_str().unwrap()}}),
+        json!({"set": {"edit.copy": "F10"}, "summarize": 7}),
+        json!({"set": {"edit.copy": "F10"}, "saveSet": "Other", "summarize": {"path": dir.join("no").join("x.html").to_str().unwrap()}}),
+    ] {
+        assert!(s.execute("edit.keyboardShortcuts", p.clone()).is_err(), "{p}");
+        let r = ks(&mut s, json!({}));
+        assert_eq!(r["overrides"], before, "{p}");
+        assert!(r["sets"].get("Other").is_none(), "{p}: {r}");
+    }
     let _ = std::fs::remove_dir_all(&dir);
 }

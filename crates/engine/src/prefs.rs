@@ -2038,10 +2038,9 @@ fn keyboard_shortcuts(s: &mut Session, p: &Value) -> Result<Value> {
     }
     // Then the sets are saved, deleted or switched, from the bindings as they now stand.
     changed |= crate::shortcut_sets::store(&mut next, p).map_err(|e| bad(cmd, e))?;
-    if changed {
-        s.edit_prefs(|p| *p = next);
-    }
-    let prefs = s.prefs();
+    // The reply and the exports read the bindings as they will be; they are committed only once
+    // the exports are written, so a bad export target changes nothing.
+    let prefs = &next;
     let filter = p.get("filter").and_then(Value::as_str).map(str::to_ascii_lowercase);
     let list: Vec<Value> = bindable_items()
         .filter(|c| filter.as_ref().is_none_or(|f| c.0.to_ascii_lowercase().contains(f) || c.1.to_ascii_lowercase().contains(f)))
@@ -2082,8 +2081,8 @@ fn keyboard_shortcuts(s: &mut Session, p: &Value) -> Result<Value> {
     if let (Some(o), Value::Object(sets)) = (out.as_object_mut(), crate::shortcut_sets::describe(prefs)) {
         o.extend(sets);
     }
-    // The bindings as a `.kys` file, or Photoshop's Summarize page (the engine's commands; the
-    // app's dialog writes both with the shell's commands and tools added).
+    // The bindings as a `.kys` file, or Photoshop's Summarize page: every bindable item (the
+    // engine's commands, the shell's commands and the tools).
     let set_name = if prefs.shortcut_set.is_empty() { crate::shortcut_sets::DEFAULTS_NAME } else { prefs.shortcut_set.as_str() };
     if let Some(target) = file_target(cmd, p.get("exportKys"))? {
         let entries: Vec<crate::kys::Entry> =
@@ -2115,6 +2114,9 @@ fn keyboard_shortcuts(s: &mut Session, p: &Value) -> Result<Value> {
             }
             None => out["html"] = json!(html),
         }
+    }
+    if changed {
+        s.edit_prefs(|p| *p = next);
     }
     if let Some(import) = import {
         out["import"] = import;
