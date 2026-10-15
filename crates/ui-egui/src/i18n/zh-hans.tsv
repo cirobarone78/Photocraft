@@ -2805,3 +2805,6 @@ curves	Smooth	平滑
 	set name	组名称
 	{set} (modified)	{set}（已修改）
 	Random	随机
+	Hue Curves	色相曲线
+	Hue Curves…	色相曲线…
+	Curve:	曲线：
